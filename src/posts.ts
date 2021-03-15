@@ -1,3 +1,15 @@
+class EventMenager{
+    private listeners = {};
+
+    addListener(eventName, callable){
+
+    }
+
+    runEvent(eventName){
+
+    }
+}
+
 class BoxPostList{
     static boxId = 'box-post-list';
     private buttonListSelector = `#${BoxPostList.boxId}>button[type=button]`;

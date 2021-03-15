@@ -1,3 +1,13 @@
+var EventMenager = /** @class */ (function () {
+    function EventMenager() {
+        this.listeners = {};
+    }
+    EventMenager.prototype.addListener = function (eventName, callable) {
+    };
+    EventMenager.prototype.runEvent = function (eventName) {
+    };
+    return EventMenager;
+}());
 var BoxPostList = /** @class */ (function () {
     function BoxPostList() {
         this.buttonListSelector = "#" + BoxPostList.boxId + ">button[type=button]";
