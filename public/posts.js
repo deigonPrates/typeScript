@@ -50,3 +50,4 @@ var BoxPostForm = /** @class */ (function () {
 }());
 new BoxPostForm();
 new BoxPostList();
+//# sourceMappingURL=posts.js.map
