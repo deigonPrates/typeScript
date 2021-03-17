@@ -1,14 +1,18 @@
-class EventMenager{
-    private listeners = {};
+interface ListnerInterface{
+    ():void;
+}
 
-    addListener(eventName, callable){
+class EventMenager{
+    private listeners:{[eventName:string]:Array<ListnerInterface>} = {};
+
+    addListener(eventName:string, callable:ListnerInterface){
         if(!(this.listeners[eventName] instanceof Array)){
             this.listeners[eventName] = [];
         }
         this.listeners[eventName].push(callable);
     }
 
-    runEvent(eventName){
+    runEvent(eventName:string){
         for(let callable of this.listeners[eventName]){
             callable();
         }
@@ -17,6 +21,8 @@ class EventMenager{
 
 class BoxPostList{
     static boxId = 'box-post-list';
+    static BOX_POST_LIST_HIDDEN = 'box-post-list-hidden';
+
     private buttonListSelector = `#${BoxPostList.boxId}>button[type=button]`;
 
     constructor(private eventManager:EventMenager){
@@ -28,9 +34,9 @@ class BoxPostList{
         buttonList.addEventListener('click', () => {
             this.hiddenBox();  
 
-            this.eventManager.runEvent('box-post-list-hidden');
+            this.eventManager.runEvent(BoxPostList.BOX_POST_LIST_HIDDEN);
         });
-        this.eventManager.addListener('box-post-form-hidden', () => {
+        this.eventManager.addListener(BoxPostForm.BOX_POST_FORM_HIDDEN, () => {
             this.showBox();
         });
     }
@@ -46,6 +52,8 @@ class BoxPostList{
 
 class BoxPostForm{
     static boxId = 'box-post-form';
+    static BOX_POST_FORM_HIDDEN = 'box-post-form-hidden';
+
     private buttonFormSelector = `#${BoxPostForm.boxId}>button[type=button]`;
 
     constructor(private eventManager:EventMenager){
@@ -57,10 +65,10 @@ class BoxPostForm{
         buttonForm.addEventListener('click', () => {
             this.hiddenBox();  
 
-            this.eventManager.runEvent('box-post-form-hidden');
+            this.eventManager.runEvent(BoxPostForm.BOX_POST_FORM_HIDDEN);
         });
-        
-        this.eventManager.addListener('box-post-list-hidden', () => {
+
+        this.eventManager.addListener(BoxPostList.BOX_POST_LIST_HIDDEN, () => {
             this.showBox();
         });
     }
