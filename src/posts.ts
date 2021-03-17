@@ -81,6 +81,16 @@ class BoxPostForm{
         boxForm.removeAttribute('style');
     }
 }
-const eventManager = new EventMenager();
-new BoxPostForm(eventManager);
-new BoxPostList(eventManager);
+
+class PostForm{
+    constructor(private eventManager:EventMenager){
+        this.init();
+    }
+
+    init(){
+        new BoxPostForm(this.eventManager);
+        new BoxPostList(this.eventManager);
+    }
+}
+
+new PostForm(new EventMenager());
